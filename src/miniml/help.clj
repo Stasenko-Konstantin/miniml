@@ -3,3 +3,7 @@
 (defn return
   [x]
   (when true x))
+
+(defn throw
+  [msg]
+  (throw (new Exception msg)))

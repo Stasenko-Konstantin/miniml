@@ -1,4 +1,4 @@
-# miniml
+# miniml. don't clone it yet
 
 in honor of [TOV_MULTIMASSO](https://github.com/Heimdell)
 

@@ -5,6 +5,6 @@
 
 (defn scan
   [string]
-  ;((let [t (token/->Token (token/TokenType :eof) "")]
-  ;  (println t)))
+  (let [t (token/new :eof " ")]
+    (println (token/to-str t)))
   (help/return string))

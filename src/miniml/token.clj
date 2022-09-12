@@ -3,27 +3,37 @@
 
 (defrecord Token
   [type content])
-;
-;(def TokenType
-;  (map
-;    [:name
-;     :num
-;     :string
-;     :bool
-;
-;     :lparen
-;     :rparen
-;     :let
-;     :case
-;     :in
-;     :not
-;     :plus                                                  ;; +
-;     :minus                                                 ;; -
-;     :mul                                                   ;; *
-;     :div                                                   ;; /
-;     :eq                                                    ;; ==
-;     :gt                                                    ;; >
-;     :lt                                                    ;; <
-;
-;     :ident
-;     :eof] (fn [t] (help/return #(t)))))
+
+(defmacro new
+  "make new Token"
+  [t c]
+  (->Token (if (some #{t} '(:name
+                             :num
+                             :string
+                             :bool
+
+                             :lparen
+                             :rparen
+                             :let
+                             :rec
+                             :in
+                             :case
+                             :not
+                             :bind                          ;; =
+                             :plus                          ;; +
+                             :minus                         ;; -
+                             :mul                           ;; *
+                             :div                           ;; /
+                             :eq                            ;; ==
+                             :gt                            ;; >
+                             :lt                            ;; <
+
+                             :ident
+                             :eof))
+             t
+             (help/throw (str "not found " t " token type")))
+           c))
+
+(defn to-str
+  [t]
+  (str (:type t) ", " (:content t)))

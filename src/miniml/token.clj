@@ -7,29 +7,25 @@
 (defmacro new
   "make new Token"
   [t c]
-  (->Token (if (some #{t} '(:name
-                             :num
-                             :string
-                             :bool
+  (->Token ('if
+             ('some #{t}
+                   '(:name :num
+                      :string :bool
 
-                             :lparen
-                             :rparen
-                             :let
-                             :rec
-                             :in
-                             :case
-                             :not
-                             :bind                          ;; =
-                             :plus                          ;; +
-                             :minus                         ;; -
-                             :mul                           ;; *
-                             :div                           ;; /
-                             :eq                            ;; ==
-                             :gt                            ;; >
-                             :lt                            ;; <
+                      :lparen :rparen
+                      :let :rec
+                      :in :case
+                      :not
+                      :bind                                 ;; =
+                      :plus                                 ;; +
+                      :minus                                ;; -
+                      :mul                                  ;; *
+                      :div                                  ;; /
+                      :eq                                   ;; ==
+                      :gt                                   ;; >
+                      :lt                                   ;; <
 
-                             :ident
-                             :eof))
+                      :ident :eof))
              t
              (help/throw (str "not found " t " token type")))
            c))

@@ -10,18 +10,15 @@ import System.Console.Haskeline
   , runInputT
   )
 
+import Lexer (scan)
+
 main :: IO ()
-main = do
-  args <- getArgs
-  parseArgs args
+main = getArgs >>= parseArgs
 
 parseArgs :: [String] -> IO ()
 parseArgs ["--help"] = putStrLn help
-parseArgs [file] = evalFile file
+parseArgs [file] = eval file
 parseArgs _ = runInputT defaultSettings repl
-
-evalFile :: String -> IO ()
-evalFile = undefined
 
 repl :: InputT IO ()
 repl = do
@@ -34,8 +31,12 @@ repl = do
     ":q" -> return ()
     ":h" -> (liftIO $ putStr help :: InputT IO ()) >> repl
     _ -> do
+      liftIO $ eval line :: InputT IO ()
       repl
+
+eval :: String -> IO ()
+eval code = putStrLn $ show $ Lexer.scan code
 
 help :: String
 help = ":q \t--\t exit\n"
-  ++ ":h \t--\t prints help\n"
+  ++ ":h \t--\t prints help"

@@ -9,6 +9,8 @@ data Token
 data TokenType
   = LET | IN | INCLUDE
   --  ^ keywords
+  | LPAREN     --  (
+  | RPAREN     --  )
   | BIND       --  =
   | LAMBDA     --  \  -- \x.x
   | DOT        --  .

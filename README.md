@@ -7,6 +7,10 @@ in honor of [TOV_MULTIMASSO](https://github.com/Heimdell)
     $ stack install
     $ miniml
 
+or
+
+    $ ./run.sh
+
 ## Options
 
     --help - print help

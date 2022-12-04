@@ -1,24 +1,21 @@
 module Main where
 
-import System.Environment
-import System.IO
-import Control.Monad.IO.Class
-import System.Console.Haskeline
-  ( InputT
-  , defaultSettings
-  , getInputLine
-  , runInputT
-  )
+import           Control.Monad.IO.Class
+import           System.Console.Haskeline (InputT, defaultSettings,
+                                           getInputLine, runInputT)
+import           System.Environment
+import           System.IO
 
-import Lexer (scan)
+import           Lexer                    (scan)
+import           Parser                   (parse)
 
 main :: IO ()
 main = getArgs >>= parseArgs
 
 parseArgs :: [String] -> IO ()
 parseArgs ["--help"] = putStrLn help
-parseArgs [file] = eval file
-parseArgs _ = runInputT defaultSettings repl
+parseArgs [file]     = eval file
+parseArgs _          = runInputT defaultSettings repl
 
 repl :: InputT IO ()
 repl = do
@@ -26,7 +23,7 @@ repl = do
   line <- getInputLine "- "
   line <- case line of
     Nothing -> return ""
-    Just l -> return l :: InputT IO String
+    Just l  -> return l :: InputT IO String
   case line of
     ":q" -> return ()
     ":h" -> (liftIO $ putStr help :: InputT IO ()) >> repl

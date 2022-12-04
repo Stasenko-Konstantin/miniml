@@ -7,9 +7,7 @@ data Token
   deriving Show
 
 data TokenType
-  = LET | IN | INCLUDE
-  --  ^ keywords
-  | LPAREN     --  (
+  = LPAREN     --  (
   | RPAREN     --  )
   | BIND       --  =
   | LAMBDA     --  \  -- \x.x
@@ -18,3 +16,5 @@ data TokenType
   | IDENT      --  identifier
   | EOF
   deriving Show
+
+-- keywords = INCLUDE, PRINT
